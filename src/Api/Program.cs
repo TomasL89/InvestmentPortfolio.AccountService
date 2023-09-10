@@ -1,6 +1,7 @@
 using Application;
 using Application.Abstractions;
-using Application.Repositories;
+using Application.Account.Repositories;
+using Application.Holding.Repositories;
 using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IHoldingRepository, HoldingRepository>();
 
 var app = builder.Build();
 

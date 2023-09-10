@@ -12,7 +12,6 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("AccountContext");
         services.AddDbContext<AccountDbContext>(options =>
             options.UseSqlServer(connectionString));
-        // https://github.com/jasontaylordev/CleanArchitecture/blob/main/src/Infrastructure/DependencyInjection.cs
         return services;
     }
 }

@@ -1,11 +1,10 @@
 using Application.Abstractions;
-using Application.Queries;
-using Domain.Entities;
+using Application.Account.Queries;
 using MediatR;
 
-namespace Application.QueryHandlers;
+namespace Application.Account.QueryHandlers;
 
-public class GetAccountByIdQueryHandler : IRequestHandler<GetAccountById, Account?>
+public class GetAccountByIdQueryHandler : IRequestHandler<GetAccountById, Domain.Entities.Account?>
 {
     private readonly IAccountRepository _accountRepository;
 
@@ -14,7 +13,7 @@ public class GetAccountByIdQueryHandler : IRequestHandler<GetAccountById, Accoun
         _accountRepository = accountRepository;
     }
 
-    public async Task<Account?> Handle(GetAccountById request, CancellationToken cancellationToken)
+    public async Task<Domain.Entities.Account?> Handle(GetAccountById request, CancellationToken cancellationToken)
     {
         return await _accountRepository.GetAccountByIdAsync(request.Id);
     }   

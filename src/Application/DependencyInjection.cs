@@ -1,6 +1,4 @@
 using System.Reflection;
-using Application.Commands;
-using Application.Queries;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,6 +1,5 @@
-using Domain.Entities;
 using MediatR;
 
-namespace Application.Commands;
+namespace Application.Account.Commands;
 
 public record DeleteAccount(Guid Id) : IRequest;

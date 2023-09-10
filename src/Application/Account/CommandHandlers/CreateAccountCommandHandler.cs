@@ -1,11 +1,10 @@
 using Application.Abstractions;
-using Application.Commands;
-using Domain.Entities;
+using Application.Account.Commands;
 using MediatR;
 
-namespace Application.CommandHandlers;
+namespace Application.Account.CommandHandlers;
 
-public class CreateAccountCommandHandler : IRequestHandler<CreateAccount, Account>
+public class CreateAccountCommandHandler : IRequestHandler<CreateAccount, Domain.Entities.Account>
 {
     private readonly IAccountRepository _accountRepository;
 
@@ -14,9 +13,9 @@ public class CreateAccountCommandHandler : IRequestHandler<CreateAccount, Accoun
         _accountRepository = accountRepository;
     }
 
-    public async Task<Account> Handle(CreateAccount request, CancellationToken cancellationToken)
+    public async Task<Domain.Entities.Account> Handle(CreateAccount request, CancellationToken cancellationToken)
     {
-      var account = new Account
+      var account = new Domain.Entities.Account
       {
         FirstName = request.FirstName,
         LastName = request.LastName,

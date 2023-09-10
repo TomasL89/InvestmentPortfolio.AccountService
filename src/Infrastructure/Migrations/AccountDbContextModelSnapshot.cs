@@ -91,12 +91,17 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Holding", b =>
                 {
                     b.HasOne("Domain.Entities.Account", "Account")
-                        .WithMany()
+                        .WithMany("Holdings")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Account", b =>
+                {
+                    b.Navigation("Holdings");
                 });
 #pragma warning restore 612, 618
         }

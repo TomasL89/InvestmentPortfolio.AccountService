@@ -1,11 +1,10 @@
 using Application.Abstractions;
-using Application.Commands;
-using Domain.Entities;
+using Application.Account.Commands;
 using MediatR;
 
-namespace Application.CommandHandlers;
+namespace Application.Account.CommandHandlers;
 
-public class UpdateAccountCommandHandler : IRequestHandler<UpdateAccount, Account>
+public class UpdateAccountCommandHandler : IRequestHandler<UpdateAccount, Domain.Entities.Account>
 {
     private readonly IAccountRepository _accountRepository;
 
@@ -14,15 +13,12 @@ public class UpdateAccountCommandHandler : IRequestHandler<UpdateAccount, Accoun
         _accountRepository = accountRepository;
     }
 
-    public async Task<Account> Handle(UpdateAccount request, CancellationToken cancellationToken)
+    public async Task<Domain.Entities.Account> Handle(UpdateAccount request, CancellationToken cancellationToken)
     {
         return await _accountRepository.UpdateAccountAsync(
             request.Id, 
             request.FirstName, 
             request.LastName, 
-            request.AccountBalance,
-            request.FeesPaid,
-            request.TaxesPaid,
             request.IsBot, 
             request.TradingMethod);
     }

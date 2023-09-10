@@ -1,8 +1,8 @@
 using Application.Abstractions;
-using Application.Commands;
+using Application.Account.Commands;
 using MediatR;
 
-namespace Application.CommandHandlers;
+namespace Application.Account.CommandHandlers;
 
 public class DeleteAccountCommandHandler : IRequestHandler<DeleteAccount>
 {

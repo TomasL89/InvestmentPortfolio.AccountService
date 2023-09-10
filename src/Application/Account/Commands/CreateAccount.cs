@@ -1,10 +1,10 @@
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Commands;
+namespace Application.Account.Commands;
 
 public record CreateAccount(
     string? FirstName,
     string? LastName,
     bool IsBot,
-    TradingMethod TradingMethod) : IRequest<Account>;
+    TradingMethod TradingMethod) : IRequest<Domain.Entities.Account>;

@@ -1,4 +1,5 @@
-using Application.Queries;
+using Application.Account.Commands;
+using Application.Account.Queries;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,41 +11,40 @@ namespace Api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IMediator _mediator;
-        // GET: api/Account
+
         public AccountController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
+        [HttpGet("{accountId}")]
+        public async Task<Account> GetAccount(Guid accountId)
+        {
+           return await _mediator.Send(new GetAccountById(accountId));
+        }
+        
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<Account>> GetAllAccounts()
         {
-            return new string[] { "value1", "value2" };
+            return await _mediator.Send(new GetAllAccounts());
         }
 
-        // GET: api/Account/5
-        [HttpGet("{id}", Name = "Get")]
-        public async Task<Account> Get(Guid id)
-        {
-           return await _mediator.Send(new GetAccountById(id));
-        }
-
-        // POST: api/Account
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Account> CreateNewAccount(string firstName, string lastName, bool isBot, TradingMethod tradingMethod)
         {
+            return await _mediator.Send(new CreateAccount(firstName, lastName, isBot, tradingMethod));
         }
 
-        // PUT: api/Account/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{accountId}")]
+        public async Task<Account> UpdateAccount(Guid accountId, string firstName, string lastName, bool isBot, TradingMethod tradingMethod)
         {
+            return await _mediator.Send(new UpdateAccount(accountId, firstName, lastName, isBot, tradingMethod));
         }
 
-        // DELETE: api/Account/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{accountId}")]
+        public async Task DeleteAccount(Guid accountId)
         {
+            await _mediator.Send(new DeleteAccount(accountId));
         }
     }
 }

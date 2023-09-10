@@ -10,4 +10,5 @@ public sealed class Account
     public double TaxesPaid { get; set; }
     public bool IsBot { get; set; }
     public TradingMethod TradingMethod {get; set;}
+    public List<Holding> Holdings { get; set; } = new();
 }
